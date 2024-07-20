@@ -4,3 +4,4 @@ media
 tailwind.js
 db.sqlite3
 *.pyc
+daisyui.min.css
