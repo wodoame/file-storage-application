@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .input{
+        @apply focus:outline-sky-500 focus:border-sky-500 border border-gray-200 dark:border-transparent dark:focus:border-gray-600 dark:focus:outline-gray-600
+    }
+}
+
+body{
+    /* https://colorhunt.co/palettes/light */
+    @apply bg-[#F6F5F2];
+    font-family:'Poppins',sans-serif;
+    font-weight:300; 
+    font-style:normal;
+    min-height:100vh; /* because of some stupid tailwind cdn behaviour */
+}
+
+/* utilities */
+
+.poppins-light{
+    font-family:'Poppins-Light';
+}
+
+
+
+@media(prefers-color-scheme:dark){
+    body{
+        background:var(--dark-body-background) !important;
+    }
+
+    .input{
+        background:var(--dark-primary) !important;
+    }
+}
+
+@layer utilities{
+    .file:hover, .hoverable:hover{
+        @apply bg-sky-200/40;
+    }
+
+    
+    .page-active{
+        @apply bg-sky-200/50; 
+    }
+
+    @media(prefers-color-scheme:dark){
+        .hoverable:hover{
+            background: rgb(128, 128, 128, 0.1);
+        }
+    
+        .page-active{
+            background: rgb(128, 128, 128, 0.1);
+        }
+    
+    }
+
+
+.dropdown-content{
+    @apply shadow-sm;
+}
+    
+
+/* files.css */
+
+#files{
+    padding:0 !important;
+    display:flex;
+    flex-wrap:wrap;
+    gap:1rem;
+}
+
+.file{
+    list-style:none;
+    padding:0.75rem;
+    width:110px;
+    position:relative;
+}
+
+.file .filename{
+    font-size:15px;
+}
+
+.file:hover{
+    cursor:pointer;
+}
+
+.file .dots{
+    position: absolute;
+    right:0.25rem;
+    top:0.25rem;
+    padding:0.125rem;
+}
+
+
+.file:hover .dots .dropdown-toggle{
+    opacity:1;
+}
+.file .dots .dropdown-toggle{
+    opacity:0;
+}
+
+.dropdown-content{
+    position:absolute; 
+    top:2rem;
+    left:5rem;
+    padding:0.75rem;
+    z-index:1;
+    @apply bg-white;
+}
+
+.dropdown-content li a{
+    padding:0.25rem;
+    display:flex; 
+    gap:0.5rem;
+    border-radius:0.5rem;
+    align-items:center;
+}
+
+
+/* upload file page*/
+@media(prefers-color-scheme:dark){
+    .file-upload{
+        background:var(--dark-primary);
+    }
+
+    .input{
+        background:var(--dark-primary);
+    }
+
+}
+
+@media(prefers-color-scheme:dark){
+    .file{
+        color:var(--dark-bold-color);
+    }
+    
+    .file:hover{
+        background-color:var(--dark-primary);
+        box-shadow: 0 0 10px rgba(106, 90, 205, 0.2) !important;
+        transition: all ease-in-out 5ms;
+    }
+
+    .dropdown-content{
+        background:var(--dark-primary);
+        color:var(--dark-text);
+        box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
+    }
+
+    .dropdown-content li:hover{
+        background: rgb(128, 128, 128, 0.1);
+    }
+
+    .file .dots:hover{
+        background: rgb(128, 128, 128, 0.1);
+    }
+}
+}

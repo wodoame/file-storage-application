@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    
+    <main class="px-4 mt-6 mx-auto block" style="width:99%">
+        <ul
+         id="files"
+         hx-get="/render-files/{{username}}/{{id}}/"
+         hx-trigger="load"
+         hx-target="#files"
+         >
+         
+         
+
+         <li class="mb-3 rounded file"> <div class="flex justify-center"> <svg viewBox="0 0 1024 1024" class="icon animate-pulse" version="1.1" width="27" height="27" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M853.333333 960H170.666667V64h469.333333l213.333333 213.333333z" class="fill-gray-500"></path><path d="M821.333333 298.666667H618.666667V96z" class="fill-gray-600"></path></g></svg> </div> <div class="mt-1"> <div class="h-3 bg-gray-600 rounded  animate-pulse w-full"> </div> </div> </li>
+         <li class="mb-3 rounded file"> <div class="flex justify-center"> <svg viewBox="0 0 1024 1024" class="icon animate-pulse" version="1.1" width="27" height="27" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M853.333333 960H170.666667V64h469.333333l213.333333 213.333333z" class="fill-gray-500"></path><path d="M821.333333 298.666667H618.666667V96z" class="fill-gray-600"></path></g></svg> </div> <div class="mt-1"> <div class="h-3 bg-gray-600 rounded  animate-pulse w-full"> </div> </div> </li>
+         <li class="mb-3 rounded file"> <div class="flex justify-center"> <svg viewBox="0 0 1024 1024" class="icon animate-pulse" version="1.1" width="27" height="27" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M853.333333 960H170.666667V64h469.333333l213.333333 213.333333z" class="fill-gray-500"></path><path d="M821.333333 298.666667H618.666667V96z" class="fill-gray-600"></path></g></svg> </div> <div class="mt-1"> <div class="h-3 bg-gray-600 rounded  animate-pulse w-full"> </div> </div> </li>
+        </ul>
+        
+      </main>
+      <dialog id="my_modal_1" class="modal">
+          <div class="modal-box rounded-md dark:bg-[#082032]">
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button> -->
+                <button class="btn btn-sm btn-circle border-0 bg-white dark:bg-transparent hoverable absolute right-2 top-2">✕</button>
+              </form>
+              <form method="POST" class="w-full">
+                {% csrf_token  %}
+                <div>
+                  <label for="" class="block text-gray-700 p-1 mb-2  dark:text-white">Folder Name</label>
+                  <input type="text" name="name" autofocus class="input w-full" pattern="^(?!.*[\\/])[^\\/]+$"  required>
+                  <!-- <input type="text" id="username" name="username" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"> -->
+              </div>
+                <!-- if there is a button in form, it will close the modal -->
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 mt-4 focus:ring-blue-500">Create</button>
+              </form>
+            </div>
+          </div>
+      </dialog>
+
+      <!-- File upload modal -->
+      <dialog id="file_upload_modal" class="modal">
+          <div class="modal-box rounded-md dark:bg-[#082032]">
+            <div class="modal-action">
+              <form method="dialog">
+                <button class="btn btn-sm btn-circle border-0 bg-white dark:bg-transparent hoverable absolute right-2 top-2">✕</button>
+              </form>
+              <form method="POST" action="/upload-file/{{id}}/" enctype="multipart/form-data" class="w-full" x-data="uploadForm">
+                {% csrf_token %}
+                <!-- <div class="mb-4">
+                    <input type="text" class="input w-full">
+                </div> -->
+                <div class="flex items-center justify-center w-full">
+                    <label for="dropzone-file" class="file-upload flex flex-col items-center justify-center w-full h-64 border border-dashed border-gray-300 rounded-lg cursor-pointer hoverable dark:border-gray-600 dark:hover:border-gray-500">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <template x-if="!changed">
+                                <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                </svg>
+                            </template>
+    
+                            <div id="svg-icon">
+                            </div>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 mt-2"><span class="font-semibold" x-text="filename"></span></p>
+                        </div>
+                        <input @change="toggle" id="dropzone-file" type="file" name="file" required class="hidden" />
+                    </label>
+                </div>
+                <div class="mt-2">
+                  <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 mt-4 focus:ring-blue-500">Upload</button>
+                </div>
+              </form>
+            </div>
+          </div>
+      </dialog>
+{% endblock %}

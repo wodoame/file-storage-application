@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block navigation %}{% endblock %}
+{% block body %}
+  <main>
+      <div class="flex items-center justify-center h-screen">
+        <div class="inline-flex w-2/3 justify-center  items-center gap-8">
+          <div class="h-full aspect-square">
+              <img src="https://avatars.githubusercontent.com/u/98283377?v=4" class="h-64 aspect-square rounded-full ring ring-sky-500/70 ring-offset-2 ring-offset-base-100" alt="profile">
+          </div>
+          <div class="w-1/3">
+              <h1 class="text-xl text-white">Alex Smith</h1>
+              <p class="mt-2 poppins-light text-gray-400">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem dolorum rerum nobis earum,
+                  tempore eaque iste sapiente minus aspernatur voluptatum eos blanditiis laudantium est corrupti soluta ea nisi eum laborum.
+              </p>
+              <button class="btn btn-info mt-3 rounded-full">
+                 Lorem, ipsum.
+              </button>
+              <button class="btn btn-info btn-outline mx-2 mt-3 rounded-full">
+                 Lorem, ipsum.
+              </button>
+            
+          </div>
+        </div>
+        </div>
+  </main>
+  <!-- <script>
+       document.addEventListener('alpine:init', ()=>{
+          Alpine.data('uploadForm', ()=>({
+
+          }));
+       });
+  </script> -->
+
+{% endblock %}
+
+{% block search_modal %}{% endblock %}

@@ -1,0 +1,6 @@
+node_modules/
+venv
+media
+tailwind.js
+db.sqlite3
+*.pyc

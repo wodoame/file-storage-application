@@ -1,0 +1,67 @@
+:root{
+    --dark-text:rgb(148, 163, 184);
+    --dark-body-background:#0F172A;
+    --dark-primary:#1E293B; 
+    --dark-bold-color:#fff; /* just white text */
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins-Light';
+    src: url('../fonts/Poppins-Light.ttf');
+}
+
+
+
+
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+
+
+
+.card{
+    border:0;
+    width:320px;
+    cursor:pointer;
+}
+
+
+.card .filecount{
+    font-size:15px;
+}
+
+
+/* card dark */
+@media(prefers-color-scheme:dark){
+    .card{
+        background:var(--dark-primary);
+        color: var(--dark-text);
+    }
+    
+    .card .filecount{
+        color: var(--dark-text) !important;
+    }
+}
+
+.card:hover{
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.2) !important;
+}
+
+.cards{
+    display:flex; 
+    gap:1rem;
+}
+
+.card .profile-image{
+    width:27px; 
+    aspect-ratio: 1/1;
+}
+
