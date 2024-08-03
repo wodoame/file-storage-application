@@ -24,11 +24,15 @@ class Index(View):
             return redirect(reverse('home', args=[request.user.username]))
         return redirect('test-login')
 
-# show all files
+
+from components.alertButton.alertButton import alertButton
 class Test(View):
     def get(self, request):
+        print(alertButton.render()) # * I'm trying to do server side rendering with the django-components library. 
+        # * This is getting the rendered html
+        # * The component itself can be made a view so this may not be necessary
         context = {}
-        return render(request, 'profile.html', context) 
+        return render(request, 'test.html', context) 
 
 # processes an uploaded file
 class UploadFile(View):
@@ -155,4 +159,14 @@ class Search(View):
         id = request.GET.get('folder_id')
         html = generateSearch(q, id)
         return HttpResponse(html)    
+
+class DeleteFileOrFolder(View):
+    def get(self, request):
+        id = request.GET.get('id')
+        isFile = request.GET.get('isFile')
+        if isFile:
+            pass
+        else: 
+            pass
+        return redirect('files')
     

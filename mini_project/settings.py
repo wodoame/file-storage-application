@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    # 'django.contrib.staticfiles', # * (replaced with django_components.safer_staticfiles')
     # 'corsheaders', # * not the cause of preventing sharing over a local network
-    'core'
+    'core',
+    'django_components', # * https://pypi.org/project/django-components/
+    'django_components.safer_staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -61,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
-        'APP_DIRS': True,
+        # 'APP_DIRS': True, # * commented because of instructions in django-components documentation
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -69,6 +72,14 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            # * from django-components docs
+            'loaders':[(
+               'django.template.loaders.cached.Loader', [
+                  'django.template.loaders.filesystem.Loader',
+                  'django.template.loaders.app_directories.Loader',
+                  'django_components.template_loader.Loader',
+               ]
+            )],
         },
     },
 ]
@@ -122,6 +133,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# * If STATICFILES_DIRS is omitted or empty, django-components will by default look for {BASE_DIR}/components
+# * so the below configuration is not required
+# STATICFILES_DIRS = [
+#    ...,
+#    os.path.join(BASE_DIR, "components"),
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

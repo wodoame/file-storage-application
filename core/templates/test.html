@@ -1,16 +1,14 @@
 {% extends 'layout.html' %}
+{% load component_tags %}
 {% block navigation%} {% endblock %}
 {% block body  %}
 
-<!-- Open the modal using ID.showModal() method -->
- <div class="p-4 mt-6">
-  <!-- <input class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:shadow-outline focus:border-blue-500" type="text" placeholder="Enter your text here"> -->
- <input type="text" 
- class="input focus:outline-sky-500 focus:border-sky-500 border border-gray-200 dark:border-transparent dark:focus:border-gray-600 dark:focus:outline-gray-600 "> 
-       
-     <br>
-
-     <input type="text" class="input mt-2 border-gray-transparent focus:border-gray-600 dark:focus:outline-gray-600">
+<div class="p-4">
+    {% component "alertButton" %}{% endcomponent %}
+    
+    <div id="response" class="mt-4">
+        
+    </div>
 </div>
 
 {% endblock %}
