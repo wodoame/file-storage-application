@@ -163,10 +163,26 @@ class Search(View):
 class DeleteFileOrFolder(View):
     def get(self, request):
         id = request.GET.get('id')
-        isFile = request.GET.get('isFile')
-        if isFile:
-            pass
+        objectType = request.GET.get('type')
+        if objectType == 'folder': 
+            self.recursiveDelete(Folder.objects.get(id=id))
         else: 
-            pass
-        return redirect('files')
+            file = File.objects.get(id=id)
+            os.remove(file.file.path) # delete the actual file
+            file.delete() # delete the model instance
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+    # * recursively delete the folder as well as every file and folder inside it
+    def recursiveDelete(self, folder):
+        files = folder.files.all()
+        subFolders = folder.sub_folders.all()
+        for file in files:
+            os.remove(file.file.path)
+            file.delete()
+
+        for subFolder in subFolders:
+            self.recursiveDelete(subFolder)
+        
+        folder.delete() # delete the parent folder
+        
     

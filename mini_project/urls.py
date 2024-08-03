@@ -28,9 +28,9 @@ urlpatterns = [
     path('test-signup/', views.TestSignup.as_view(), name='test-signup'),
     path('get-icon/', views.getIcon.as_view()),
     path('search/', views.Search.as_view()),
+    path('delete/', views.DeleteFileOrFolder.as_view(), name='delete'),
     path('upload-file/<uuid:id>/', views.UploadFile.as_view(), name='upload-file'),
     path('download/<uuid:id>/', views.DownloadFile.as_view(), name='download'),
-    path('delete/', views.DeleteFileOrFolder.as_view(), name='delete'),
     path('<str:username>/', views.Home.as_view(), name='home'),
     path('<str:username>/<uuid:id>/', views.Files.as_view(), name='files'), # * For testing
     path('render-files/<str:username>/<uuid:id>/', views.RenderFiles.as_view()),
