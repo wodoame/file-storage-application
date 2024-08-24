@@ -31,7 +31,24 @@ document.addEventListener('alpine:init', ()=>{
             this.changed = true;
          }
 
+      }));
+
+      Alpine.data('window', ()=>({
+         maximized: false, 
+         width: 'max-w-2xl',
+         open: true, 
+         hiddenClass: '',
+         toggleMaximize(){
+            this.width = this.maximized ? 'max-w-2xl': 'max-w-full h-[calc(100%-1rem)] flex';
+            this.maximized = !this.maximized;
+         }, 
+         close(){
+            this.hiddenClass = this.open? 'hidden': ''; // if window is already open then it means we want to close it
+            this.open = false; 
+         }
+
       })); 
+
 });
 
 

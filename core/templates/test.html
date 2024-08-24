@@ -4,11 +4,13 @@
 {% block body  %}
 
 <div class="p-4">
-    {% component "alertButton" %}{% endcomponent %}
+    {% component "window" %}
+      {% fill "body" %}
+            {% component "textEditor" %} {% endcomponent %}
+      {% endfill %}
+    {% endcomponent %}
+
     
-    <div id="response" class="mt-4">
-        
-    </div>
 </div>
 
 {% endblock %}
