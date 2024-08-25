@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load component_tags %}
 <html lang="en" data-theme="">
 <head>
     <meta charset="UTF-8">
@@ -22,12 +23,12 @@
     <title>Document</title>
 </head>
 <body>
-  {% block navigation%}
-    <nav class="p-4">
+  {% block navigation %}
+    <nav class="p-4 relative">
       <div class="flex gap-4">
-          <div x-data="navImage" class="inline-flex items-center">
+          <div x-data="navImage" class="inline-flex items-center"  data-modal-target="static-modal" data-modal-toggle="static-modal">
              <template x-if="loaded">
-                <img :src="url" class="h-9 aspect-square rounded-full ring-1 ring-sky-500/70 ring-offset-2 ring-offset-base-100" alt="profile-picture">
+                <img :src="url" id="profile-pic" class="h-9 aspect-square rounded-full ring-1 ring-sky-500/70 ring-offset-2 ring-offset-base-100" alt="profile-picture">
              </template>
              
              <template x-if="!loaded">
@@ -212,8 +213,17 @@
   </dialog>
   {% endblock %}
 
-  
-   <script src="{% static 'js/states.js' %}"></script>
-   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+  {% component "UploadPictureModal" %}{% endcomponent %}
+  <script src="{% static 'js/states.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+  <script>
+     const previewImage = ()=>{
+       const file = document.getElementById('profile-image').files[0];
+       const url =  URL.createObjectURL(file); 
+       const imageElement = document.getElementById('image-preview');
+       imageElement.src = url
+       return ()=>URL.revokeObjectURL(url);
+     };
+  </script>
 </body>
 </html>

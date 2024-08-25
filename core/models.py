@@ -35,12 +35,7 @@ class File(AbstractModel):
 # * This model extends the user model through a one-to-one relationship by including other properties that cannot be directly added to the built-in user model
 class Profile(AbstractModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    
-    
-    def searchableData(self):
-        user = self.user
-        return user.username + ' ' +  user.email
-    
+    profile_pic = models.ImageField(upload_to='profile_pics/', default='default.png')
     
     def __str__(self) -> str:
         return self.user.username + ' profile'

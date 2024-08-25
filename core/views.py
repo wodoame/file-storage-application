@@ -28,7 +28,7 @@ class Index(View):
 from components.alertButton.alertButton import alertButton
 class Test(View):
     def get(self, request):
-        print(alertButton.render()) # * I'm trying to do server side rendering with the django-components library. 
+        # print(alertButton.render()) # * I'm trying to do server side rendering with the django-components library. 
         # * This is getting the rendered html
         # * The component itself can be made a view so this may not be necessary
         context = {}
@@ -142,14 +142,21 @@ class TestSignup(View):
     
     def post(self, request): 
         print(request.POST)
+        username = request.POST.get('username')
+        email = request.POST.get('email')
         form = CreateUserForm(request.POST)
         if form.is_valid(): 
             user = form.save()
             Folder.objects.create(name='root', user=user)
             return redirect('test-login')
-        else: 
-            print(form.errors.as_json())
-        return self.get(request)
+        # print(form.errors.get_json_data().values())
+        # print(form.errors.values())
+        jsonData = form.errors.get_json_data().values()
+        errors = []
+        for errorType in jsonData: 
+            for error in errorType: 
+                errors.append(error.get('message'))
+        return render(request, self.template, {'errors': errors, 'username': username, 'email': email})
 
 from django.contrib.auth import logout
 class Logout(View):
