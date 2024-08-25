@@ -130,7 +130,6 @@ class TestLogin(View):
         else: 
             username = request.POST.get('username')
             context = {'invalidCredentials': True, 'username': username}
-            print(form.errors.as_data())
         return render(request, self.template, context)
 
 # Handles the signup page
@@ -149,7 +148,7 @@ class TestSignup(View):
             Folder.objects.create(name='root', user=user)
             return redirect('test-login')
         else: 
-            print(form.errors.as_data())
+            print(form.errors.as_json())
         return self.get(request)
 
 # Handles the search
