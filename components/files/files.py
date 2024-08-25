@@ -18,7 +18,8 @@ class Files(Component):
                 'icon': getSVG('folder') if item.isFolder() else getSVG(item.extension), # * could have used isinstance(item, Folder) but that doesn't matter
                 'openurl': f"/{username}/{item.id}/" if item.isFolder() else "#",
                 'downloadurl': '#' if item.isFolder() else f'/download/{item.id}/',
-                'deleteurl': f'/delete/?id={item.id}&type=folder' if item.isFolder() else f'/delete/?id={item.id}&type=file'
+                'deleteurl': f'/delete/?id={item.id}&type=folder' if item.isFolder() else f'/delete/?id={item.id}&type=file',
+                'isFile': not item.isFolder()
             } for item in combined
         ]
-        return self.render_to_response(context={'filesAndFolders': combined}) 
+        return self.render_to_response(context={'filesAndFolders': combined, 'isOwner':request.user.username == username}) 

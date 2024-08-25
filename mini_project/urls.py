@@ -26,6 +26,7 @@ urlpatterns = [
     path('test/', views.Test.as_view(), name='test'),
     path('test-login/', views.TestLogin.as_view(), name='test-login'),
     path('test-signup/', views.TestSignup.as_view(), name='test-signup'),
+    path('logout/', views.Logout.as_view(), name='logout'),
     path('get-icon/', views.getIcon.as_view()),
     path('search/', views.Search.as_view()),
     path('delete/', views.DeleteFileOrFolder.as_view(), name='delete'),
