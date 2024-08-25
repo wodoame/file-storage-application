@@ -13,9 +13,11 @@
          <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
     {% endblock %}
     <link rel="stylesheet" href="{% static 'css/index.css'%}"> 
-    <link rel="stylesheet" href="{% static 'css/daisyui.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/daisyui.min.css' %}"> -->
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
-    <script src="{% static 'js/tailwind.js' %}" defer></script>
+    <!-- <script src="{% static 'js/tailwind.js' %}" defer></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>    
     <script src="{% static 'js/alpine.min.js' %}" defer></script>
     <title>Document</title>
 </head>
@@ -56,8 +58,8 @@
             {% endif %} -->
           </div>
           
-          {% if page == 'my-files' and isOwner %}
           <div class="flex items-center px-2 gap-4">
+            {% if page == 'my-files' and isOwner %}
             <!-- <a href="" class="flex gap-1 hoverable p-2 rounded-md">
                 <svg viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="fill-gray-400" width="24" height="24"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>new-indicator</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="scheduler" class="fill-gray-400" transform="translate(85.333333, 85.333333)"> <path d="M170.666667,1.42108547e-14 C264.923264,-3.10380131e-15 341.333333,76.4100694 341.333333,170.666667 C341.333333,264.923264 264.923264,341.333333 170.666667,341.333333 C76.4100694,341.333333 2.57539587e-14,264.923264 1.42108547e-14,170.666667 C2.6677507e-15,76.4100694 76.4100694,3.15255107e-14 170.666667,1.42108547e-14 Z M170.666667,42.6666667 C99.9742187,42.6666667 42.6666667,99.9742187 42.6666667,170.666667 C42.6666667,241.359115 99.9742187,298.666667 170.666667,298.666667 C241.359115,298.666667 298.666667,241.359115 298.666667,170.666667 C298.666667,99.9742187 241.359115,42.6666667 170.666667,42.6666667 Z M192,85.3333333 L191.999333,149.333333 L256,149.333333 L256,192 L191.999333,191.999333 L192,256 L149.333333,256 L149.333333,191.999333 L85.3333333,192 L85.3333333,149.333333 L149.333333,149.333333 L149.333333,85.3333333 L192,85.3333333 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
                 <span>New</span>
@@ -66,9 +68,18 @@
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="None"  height="24" width="24"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 19H5C3.89543 19 3 18.1046 3 17V7C3 5.89543 3.89543 5 5 5H9.58579C9.851 5 10.1054 5.10536 10.2929 5.29289L12 7H19C20.1046 7 21 7.89543 21 9V11" class="dark:stroke-gray-400 stroke-gray-800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M18 14V17M18 20V17M18 17H15M18 17H21" class="dark:stroke-gray-400 stroke-gray-800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                 <span>Create Folder</span>
               </a>
+              {% endif %}
+
+              {% if user.is_authenticated %}
+              <a href="/logout/" role="button" class="flex gap-1 hoverable p-2 rounded-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="dark:fill-gray-400"><path d="M16 13v-2H7V8l-5 4 5 4v-3z"></path><path d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z"></path></svg>
+                <!-- <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="None"  height="24" width="24"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 19H5C3.89543 19 3 18.1046 3 17V7C3 5.89543 3.89543 5 5 5H9.58579C9.851 5 10.1054 5.10536 10.2929 5.29289L12 7H19C20.1046 7 21 7.89543 21 9V11" class="dark:stroke-gray-400 stroke-gray-800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M18 14V17M18 20V17M18 17H15M18 17H21" class="dark:stroke-gray-400 stroke-gray-800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> -->
+                
+                <span>Sign out</span>
+              </a>
+              {% endif %}
               
             </div>
-            {% endif %}
             
             {% if page == 'my-files' %}
             <div class="breadcrumbs text-sm flex items-center">

@@ -151,6 +151,13 @@ class TestSignup(View):
             print(form.errors.as_json())
         return self.get(request)
 
+from django.contrib.auth import logout
+class Logout(View):
+    def get(self, request):
+        logout(request)
+        return redirect('test-login')
+
+
 # Handles the search
 class Search(View):
     def get(self, request): 
