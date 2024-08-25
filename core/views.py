@@ -147,6 +147,7 @@ class TestSignup(View):
         form = CreateUserForm(request.POST)
         if form.is_valid(): 
             user = form.save()
+            Profile.objects.create(user=user)
             Folder.objects.create(name='root', user=user)
             return redirect('test-login')
         # print(form.errors.get_json_data().values())
@@ -200,8 +201,6 @@ class DeleteFileOrFolder(View):
 
 class UploadImage(View):
     def post(self, request): 
-        # print('this route is working')
-        print(request.FILES)
         userData, created = Profile.objects.get_or_create(user=request.user)
         userData.profile_pic = request.FILES.get('profile-image')
         userData.save()
