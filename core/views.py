@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from .forms import UploadFileForm, CreateFolderForm, CreateUserForm
-from .models import File, Folder
+from .models import File, Folder, Profile
 from .utils import getExtension, getPath, getSVG, checkOwnership
 from .components import renderFiles, renderPath, generateSearch
 
@@ -191,11 +191,22 @@ class DeleteFileOrFolder(View):
         subFolders = folder.sub_folders.all()
         for file in files:
             os.remove(file.file.path)
-            file.delete()
+            file.delete() # delete the database record of the file
 
         for subFolder in subFolders:
             self.recursiveDelete(subFolder)
         
-        folder.delete() # delete the parent folder
+        folder.delete() # delete the database record of the parent folder
+
+class UploadImage(View):
+    def post(self, request): 
+        # print('this route is working')
+        print(request.FILES)
+        userData, created = Profile.objects.get_or_create(user=request.user)
+        userData.profile_pic = request.FILES.get('profile-image')
+        userData.save()
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+    
         
     

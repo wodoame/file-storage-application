@@ -19,6 +19,7 @@
     <!-- <script src="{% static 'js/tailwind.js' %}" defer></script> -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>    
+    <script>localStorage.setItem('url', '{{user.profile.profile_pic.url}}')</script>
     <script src="{% static 'js/alpine.min.js' %}" defer></script>
     <title>Document</title>
 </head>
@@ -223,6 +224,10 @@
        const imageElement = document.getElementById('image-preview');
        imageElement.src = url
        return ()=>URL.revokeObjectURL(url);
+     };
+
+     const submitForm = ()=>{
+       document.getElementById('upload-picture-form').submit();
      };
   </script>
 </body>

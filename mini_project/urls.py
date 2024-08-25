@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from core import views
 from components.testButton.testButton import testButton
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,6 +33,7 @@ urlpatterns = [
     path('search/', views.Search.as_view()),
     path('delete/', views.DeleteFileOrFolder.as_view(), name='delete'),
     path('upload-file/<uuid:id>/', views.UploadFile.as_view(), name='upload-file'),
+    path('upload-image/', views.UploadImage.as_view(), name='upload-image'),
     path('download/<uuid:id>/', views.DownloadFile.as_view(), name='download'),
     path('<str:username>/', views.Home.as_view(), name='home'),
     path('<str:username>/<uuid:id>/', views.Files.as_view(), name='files'), # * For testing
@@ -38,3 +41,6 @@ urlpatterns = [
     path('render-path/<str:username>/<uuid:id>/', views.RenderPath.as_view()),
     path('components/testButton/', testButton.as_view()),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

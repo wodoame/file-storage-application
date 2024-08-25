@@ -16,7 +16,8 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5 space-y-4">
-                <form enctype='multipart/form-data' class="flex items-center justify-center space-x-6">
+                <form action="/upload-image/" enctype='multipart/form-data' method="POST" class="flex items-center justify-center space-x-6" id="upload-picture-form">
+                    {% csrf_token %}
                     <div class="shrink-0">
                         <img class="h-16 w-16 object-cover rounded-full" id="image-preview" src="https://avatars.githubusercontent.com/u/98283377?v=4"  alt="Current profile photo" />
                     </div>
@@ -37,7 +38,7 @@
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-4 md:p-5 border-t border-gray-200  dark:border-gray-600">
-                <button data-modal-hide="static-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button onclick="submitForm()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Upload
                 </button>
                 <button data-modal-hide="static-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium rounded-full text-gray-900 focus:outline-none bg-white  border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">

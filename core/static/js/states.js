@@ -7,7 +7,11 @@ document.addEventListener('alpine:init', ()=>{
         }, 
 
         async getImage(){
-            const response = await fetch('https://avatars.githubusercontent.com/u/98283377?v=4');
+            // let currentUrl = localStorage.getItem('url');
+            // if(currentUrl.length == 0){
+
+            // }
+            const response = await fetch('https://th.bing.com/th/id/OIP.Yaficbwe3N2MjD2Sg0J9OgHaHa?rs=1&pid=ImgDetMain');
             const blob = await response.blob();
             this.url = URL.createObjectURL(blob);
             this.loaded = true;
