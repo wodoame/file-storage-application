@@ -7,11 +7,10 @@ document.addEventListener('alpine:init', ()=>{
         }, 
 
         async getImage(){
-            // let currentUrl = localStorage.getItem('url');
-            // if(currentUrl.length == 0){
-
-            // }
-            const response = await fetch('https://th.bing.com/th/id/OIP.Yaficbwe3N2MjD2Sg0J9OgHaHa?rs=1&pid=ImgDetMain');
+            let currentUrl = localStorage.getItem('url');
+            // https://th.bing.com/th/id/OIP.Yaficbwe3N2MjD2Sg0J9OgHaHa?rs=1&pid=ImgDetMain
+         
+            const response = await fetch(currentUrl);
             const blob = await response.blob();
             this.url = URL.createObjectURL(blob);
             this.loaded = true;

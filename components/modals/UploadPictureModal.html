@@ -19,7 +19,7 @@
                 <form action="/upload-image/" enctype='multipart/form-data' method="POST" class="flex items-center justify-center space-x-6" id="upload-picture-form">
                     {% csrf_token %}
                     <div class="shrink-0">
-                        <img class="h-16 w-16 object-cover rounded-full" id="image-preview" src="https://avatars.githubusercontent.com/u/98283377?v=4"  alt="Current profile photo" />
+                        <img class="h-16 w-16 object-cover rounded-full" id="image-preview" src="{{user.profile.profile_pic.url}}"  alt="Current profile photo" />
                     </div>
                     <label>
                         <span class="sr-only">Choose profile photo</span>
